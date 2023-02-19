@@ -8,5 +8,6 @@ RUN         apt-get update \
                   g++ \
                   make \
                   cmake \
+                  ninja-build \
                   qemu-system-x86 \
                   python3 \
