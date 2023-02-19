@@ -1,0 +1,10 @@
+version: "3"
+services:
+  os-ubuntu:
+    container_name: os-ubuntu
+    build: ./build/
+    restart: on-failure
+    tty: true
+    volumes:
+      - "/tmp/sweb/:/tmp/sweb/"
+      - "./src/:/tmp/src/"
