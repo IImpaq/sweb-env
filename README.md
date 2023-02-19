@@ -29,6 +29,9 @@ done on the host system (macOS) using the provided script.
 ### Execution
 * To start sweb via qemu: run the "emulate" script
 
+### Notes
+* I chose to use Ninja instead of Make due to improved build performance.
+
 ## Author
 Marcus Gugacs
 
