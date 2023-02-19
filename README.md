@@ -28,5 +28,5 @@ Marcus Gugacs
 See LICENSE file
 
 ## Acknowledgments
-https://github.com/IAIK/sweb
-https://www.iaik.tugraz.at/course/operating-systems-inp32512uf-wintersemester-2022-23/
+* https://github.com/IAIK/sweb
+* https://www.iaik.tugraz.at/course/operating-systems-inp32512uf-wintersemester-2022-23/
