@@ -10,16 +10,24 @@ done on the host system (macOS) using the provided script.
 
 ## Getting Started
 ### Dependencies
+* zsh
 * QEMU
 * Docker
 * Docker Compose
 
 ### Installation
-* Clone the repository
-* Run the setup script
+* Clone this repository
+* Run the "setup" script
+* Clone the sweb repository to the root of this folder as "src"
+
+### Workflow
+* Start the docker container by run the "run" script
+* Open the local sweb repository stored in the "src" directory and make any changes you feel like
+* When opening the project for the first time in CLion create a new toolchain and select the newly created docker container.
+* Run the "compile" script before executing
 
 ### Execution
-* Run the emulation script
+* To start sweb via qemu: run the "emulate" script
 
 ## Author
 Marcus Gugacs
