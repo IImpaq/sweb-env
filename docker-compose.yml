@@ -5,6 +5,7 @@ services:
     build: ./build/
     restart: on-failure
     tty: true
+    platform: linux/amd64
     volumes:
       - "/tmp/sweb/:/tmp/sweb/"
       - "./src/:/tmp/src/"
