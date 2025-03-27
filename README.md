@@ -58,6 +58,26 @@ guarantee that anything works (correctly) and/or that nothing will break.
 * Add a new "Path mapping": "Remote" is "/tmp/src/" and "Local" is the path to the sweb repository on your host machine
 * Apply the changes
 
+### Practical Example
+
+```bash
+# First time setup:
+git clone git@github.com:IImpaq/sweb-env.git
+cd sweb-env
+git clone https://github.com/isec-tugraz/sweb.git src # Replace with your repository
+./setup.sh
+
+# Everytime you start working:
+./run.sh
+
+# When changing code:
+./compile.sh release # or debug
+./emulate.sh run
+
+# When finished working:
+./stop.sh
+```
+
 ## Author
 Marcus Gugacs
 
