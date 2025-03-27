@@ -23,6 +23,7 @@ guarantee that anything works (correctly) and/or that nothing will break.
 
 ### Installation
 * Clone this repository
+* Make sure Docker is running
 * Run the "setup" script
 * Clone the sweb repository to the root of this folder as "src"
 
@@ -61,6 +62,8 @@ guarantee that anything works (correctly) and/or that nothing will break.
 ### Practical Example
 
 ```bash
+# Important: Make sure you have Docker running
+
 # First time setup:
 git clone git@github.com:IImpaq/sweb-env.git
 cd sweb-env
