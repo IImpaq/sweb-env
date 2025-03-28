@@ -30,7 +30,7 @@ Before you begin, ensure you have the following installed on your macOS system:
 ### Initial Setup
 1. Clone this repository:
    ```bash
-   git clone https://github.com:IImpaq/sweb-env.git
+   git clone https://github.com/IImpaq/sweb-env.git
    cd sweb-env
    ```
 
@@ -101,7 +101,7 @@ When you're done working:
    - 'target remote' args: ```127.0.0.1:1234```
    - Symbol file: ```/tmp/sweb/kernel64.x```
    - Sysroot: ```/tmp/sweb/```
-   - Path mapping: 
+   - Path mapping:
      - Remote: ```/tmp/src/```
      - Local: Path to your local SWEB repository
 
@@ -109,7 +109,7 @@ When you're done working:
 
 ```bash
 # First time setup:
-git clone https://github.com:IImpaq/sweb-env.git
+git clone https://github.com/IImpaq/sweb-env.git
 cd sweb-env
 git clone https://github.com/isec-tugraz/sweb.git src
 ./setup.sh
