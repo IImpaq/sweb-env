@@ -1,96 +1,143 @@
-# sweb-env
-My development setup to work on the SWEB educational OS.
+# 🌐 sweb-env
 
-## Description
-This repository contains all the necessary scripts to set up a more or less complete development environment
-to work on the SWEB educational OS on macOS. I prepared the workspace and tried to automate as much of the process as
-possible before taking the Operating Systems course at TU Graz. In my case CLion is used as an IDE. Docker and Docker
-Compose are used to setup a container with the necessary packages installed. The execution of the SWEB OS itself is
-done on the host system (macOS) using the provided script.
+## 📝 Description
+This repository contains scripts to set up a complete development environment for the SWEB educational operating system on macOS. It uses Docker for the development environment and QEMU for running the OS.
 
-## Notes
-I chose to use Ninja instead of Make due to improved build performance. Anything in this repository is highly
-experimental and I expect for stuff to not work sometimes. This repository will probably receive some patches during
-the next few months. Brew is recommended for installing necessary packages on the macOS host. I won't and can't
-guarantee that anything works (correctly) and/or that nothing will break.
+## ⚠️ Disclaimer
+Use at your own risk! While this setup has been tested, I cannot take responsibility for any issues that might arise from using these scripts. Development environments can be complex, and unexpected problems may occur depending on your specific system configuration. Always back up your work before making significant changes to your development environment.
 
-## Getting Started
-### Dependencies
-* zsh
-* QEMU
-* Docker
-* Docker Compose
+## 🔧 Prerequisites
+Before you begin, ensure you have the following installed on your macOS system:
 
-### Installation
-* Clone this repository
-* Make sure Docker is running
-* Run the "setup" script
-* Clone the sweb repository to the root of this folder as "src"
+1. **Homebrew** - Package manager for macOS
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 
-### Workflow
-* Start the docker container by run the "run" script
-* Open the local sweb repository (stored in the "src") with the IDE of your choice (CLion in my case) directory and make any changes you feel like
-* When opening the project for the first time in CLion create a new toolchain and select the newly created docker container.
-* Hint: for ease you can move the docker toolchain up in the hierarchy to used it as a default
-* Apply the changes
-* Run the "compile" script before executing
-* Hint: compile can be run either in "debug" or "release" mode (passed as a parameter)
+3. **QEMU** - Emulator to run the OS
+   ```bash
+   brew install qemu
+   ```
 
-### How to run the OS?
-* To start sweb via qemu: type "../emulate.sh run" in the terminal to start a qemu instance
-* Hint: this expects you to be within the "src" directory
+4. **Docker Desktop** - For containerized development
+   ```bash
+   brew install --cask docker
+   ```
+   After installation, launch Docker Desktop from your Applications folder.
 
-### How to debug the os?
-* To debug sweb: type "../emulate.sh debug" in the terminal
-* Important: run the compile script in debug mode before (and you might want to run the clean script before that)
-* Hint: this expects you to be within the "src" directory
-* Hint: you need to setup your IDE correctly to be able to debug sweb efficiently
-* Click the debug button in your correctly configured IDE and it should connect to the qemu instance
-* Hint: recompile when changing breakpoints
+## 🚀 Getting Started
 
-### How to setup an IDE for debugging?
-* Important: this guide will only focus on CLion.
-* Click "Edit Configurations..."
-* Click the plus icon in the top-left corner and select "Remote Debug"
-* Choose any logical name
-* Set the value of "'target remote' args" to be "127.0.0.1:1234"
-* Set the value of Symbol file to be "/tmp/sweb/kernel64.x"
-* Set the value of Sysroot to be "/tmp/sweb/"
-* Add a new "Path mapping": "Remote" is "/tmp/src/" and "Local" is the path to the sweb repository on your host machine
-* Apply the changes
+### Initial Setup
+1. Clone this repository:
+   ```bash
+   git clone https://github.com:IImpaq/sweb-env.git
+   cd sweb-env
+   ```
 
-### Practical Example
+2. Clone the SWEB repository:
+   ```bash
+   git clone https://github.com/isec-tugraz/sweb.git src
+   ```
+   (You can replace with your own SWEB repository URL)
+
+3. Run the setup script:
+   ```bash
+   ./setup.sh
+   ```
+
+## 💻 Development Workflow
+
+### Starting Your Development Session
+1. **Start the Docker container**:
+   ```bash
+   ./run.sh
+   ```
+
+2. **Open the 'src' folder as a project in your IDE** (CLion recommended):
+   - When opening for the first time, create a new toolchain and select the Docker container
+   - Move the Docker toolchain up in the hierarchy to use it as default
+
+3. **Make your code changes** in the ```src``` directory
+
+4. **Compile your changes**:
+   ```bash
+   ../compile.sh release   # For release mode
+   # OR
+   ../compile.sh debug     # For debug mode
+   ```
+
+5. **Run the OS**:
+   ```bash
+   cd src
+   ../emulate.sh run
+   ```
+
+### Debugging the OS
+1. **Compile in debug mode**:
+   ```bash
+   ../compile.sh debug
+   ```
+
+2. **Start QEMU in debug mode**:
+   ```bash
+   cd src
+   ../emulate.sh debug
+   ```
+
+3. **Connect your IDE debugger** to the QEMU instance
+
+### Ending Your Session
+When you're done working:
+```bash
+../stop.sh
+```
+
+## 🔍 Setting Up CLion for Debugging
+
+1. Click "Edit Configurations..."
+2. Click the plus icon and select "Remote Debug"
+3. Configure the following settings:
+   - Name: Choose any logical name
+   - 'target remote' args: ```127.0.0.1:1234```
+   - Symbol file: ```/tmp/sweb/kernel64.x```
+   - Sysroot: ```/tmp/sweb/```
+   - Path mapping: 
+     - Remote: ```/tmp/src/```
+     - Local: Path to your local SWEB repository
+
+## 📋 Complete Example Workflow
 
 ```bash
-# Important: Make sure you have Docker running
-
 # First time setup:
-git clone git@github.com:IImpaq/sweb-env.git
+git clone https://github.com:IImpaq/sweb-env.git
 cd sweb-env
-git clone https://github.com/isec-tugraz/sweb.git src # Replace with your repository
+git clone https://github.com/isec-tugraz/sweb.git src
 ./setup.sh
 
-# Everytime you start working:
+# Daily development workflow:
+# When starting:
 ./run.sh
+cd src
 
-# When changing code:
-./compile.sh release # or debug
-./emulate.sh run
+# Make code changes in src directory
+../compile.sh release
+../emulate.sh run
 
-# When finished working:
+# When finished:
+cd ..
 ./stop.sh
 ```
 
-## Author
+## 👤 Author
 Marcus Gugacs
 
-## License
+## 📄 License
 See LICENSE file
 
-## Acknowledgments
-* https://github.com/IAIK/sweb
-* https://www.iaik.tugraz.at/course/operating-systems-inp32512uf-wintersemester-2022-23/
-* https://www.iaik.tugraz.at/teaching/materials/os/tutorials/sweb-kernel-debuggen-mit-cgdb/
+## 🙏 Acknowledgments
+* https://github.com/isec-tugraz/sweb
+* https://www.isec.tugraz.at/course/operating-systems-inp32512uf-wintersemester-2022-23/
+* https://www.isec.tugraz.at/teaching/materials/os/tutorials/sweb-kernel-debuggen-mit-cgdb/
 * https://brew.sh/
 * https://www.qemu.org/
 * https://www.zsh.org/
