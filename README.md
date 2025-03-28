@@ -13,6 +13,8 @@ Before you begin, ensure you have the following installed on your macOS system:
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
+   
+2. **Zsh** - Shell environment (comes pre-installed on newer macOS versions)
 
 3. **QEMU** - Emulator to run the OS
    ```bash
@@ -127,6 +129,26 @@ cd src
 cd ..
 ./stop.sh
 ```
+
+## 🗂️ Repository Structure and Scripts
+
+### Scripts Overview
+This repository contains several utility scripts to manage your SWEB development environment:
+
+- **```setup.sh```**: Initializes the Docker environment and prepares everything for first use
+- **```run.sh```**: Starts the Docker container for development
+- **```stop.sh```**: Stops the running Docker container
+- **```compile.sh```**: Compiles the SWEB operating system (accepts ```debug``` or ```release``` parameter)
+- **```clean.sh```**: Removes build artifacts and cleans the project
+- **```emulate.sh```**: Launches QEMU to run or debug the compiled OS
+
+### Key Files and Locations
+- **```docker-compose.yml```**: Defines the Docker container configuration for the development environment
+- **```src/```**: Directory containing the SWEB source code (created by cloning your SWEB repository)
+- **```/tmp/sweb/```**: Location inside the Docker container where compiled SWEB files are stored
+- **```/tmp/src/```**: Location inside the Docker container where source files are mounted
+- **```/tmp/sweb/kernel64.x```**: The compiled kernel binary used for debugging
+- **```127.0.0.1:1234```**: Default debugging port used by QEMU for GDB connection
 
 ## 👤 Author
 Marcus Gugacs
